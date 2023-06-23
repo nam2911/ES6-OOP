@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ES6 - OOP</title>
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0-alpha1/css/bootstrap.min.css"
+    />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="bg-dark bg-gradient text-white py-2 text-center">
+      <div class="container">
+        <h4>CyberSoft - ES6 - OOP</h4>
+      </div>
+    </header>
+
+    <!-- Manager -->
+    <section class="py-3 bg-body-secondary">
+      <div class="container-fluid">
+        <h5 class="text-center text-capitalize">
+          Institute of Research and Teaching
+        </h5>
+        <div class="input-group">
+          <button
+            class="btn btn-success"
+            data-bs-toggle="modal"
+            data-bs-target="#formInput"
+          >
+            Add
+          </button>
+          <button class="btn btn-primary" id="sort-by-name">
+            Sort By Name
+          </button>
+          <input type="text" class="form-control" id="searchBox" />
+          <label class="input-group-text" for="searchBox">Search</label>
+        </div>
+        <div class="input-group mt-2">
+          <label class="input-group-text" for="filterCategory">Category</label>
+          <select class="form-select" id="filterCategory">
+            <option selected value="all">Select...</option>
+            <option value="student">Student</option>
+            <option value="employee">Employee</option>
+            <option value="customer">Customer</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <!-- List Person -->
+    <section class="list">
+      <div class="container-fluid py-2">
+        <div class="bg-body-tertiary">
+          <div class="card card-header bg-primary bg-gradient text-bg-primary">
+            <h4 class="text-center">List Person</h4>
+          </div>
+          <table
+            class="table table-hover table-bordered border-primary-subtle card-body"
+          >
+            <thead class="table-primary">
+              <tr>
+                <th class="text-center">ID</th>
+                <th>Full Name</th>
+                <th>Address</th>
+                <th>Email</th>
+                <th class="text-center">Average Score</th>
+                <th class="text-center">Total Salary</th>
+                <th class="text-center">Name Company</th>
+                <th class="text-center">Bill Invoice</th>
+                <th class="text-center">Customer Review</th>
+                <th class="text-center">Features</th>
+                <th class="text-center">Category</th>
+              </tr>
+            </thead>
+            <tbody class="border-primary-subtle"></tbody>
+            <tfoot class="text-center table-primary">
+              <tr>
+                <th class="text-center" colspan="11">
+                  Total Person : <span id="totalPerson"></span>
+                </th>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Modal Form-->
+    <div
+      class="modal fade"
+      id="formInput"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="staticBackdropLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+          <div class="modal-header bg-primary bg-gradient text-bg-primary">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel">
+              Enter Information
+            </h1>
+            <button
+              type="button"
+              id="btn-close"
+              class="btn text-bg-primary fs-5 border-light"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            >
+              <i class="fa fa-times"></i>
+            </button>
+          </div>
+          <form class="modal-body row form-input">
+            <div class="input-group my-1">
+              <label for="category" class="input-group-text">Category</label>
+              <select name="category" id="category" class="form-select">
+                <option value="select">Select...</option>
+                <option value="student">Student</option>
+                <option value="employee">Employee</option>
+                <option value="customer">Customer</option>
+              </select>
+              <span
+                class="form-message d-none input-group-text bg-danger text-bg-danger"
+                >hehe</span
+              >
+            </div>
+            <div class="input-group my-1">
+              <label for="id" class="input-group-text">ID</label>
+              <input
+                type="text"
+                class="form-control"
+                id="id"
+                rulesCheck="required|number|minValue:1|availableID:listPerson"
+              />
+              <span
+                class="form-message d-none input-group-text bg-danger text-bg-danger"
+              ></span>
+            </div>
+            <div class="input-group my-1">
+              <label for="name" class="input-group-text">Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="name"
+                rulesCheck="required|letter"
+              />
+              <span
+                class="form-message d-none input-group-text bg-danger text-bg-danger"
+              ></span>
+            </div>
+            <div class="input-group my-1">
+              <label for="address" class="input-group-text">Address</label>
+              <input
+                type="text"
+                class="form-control"
+                id="address"
+                rulesCheck="required"
+              />
+              <span
+                class="form-message d-none input-group-text bg-danger text-bg-danger"
+              ></span>
+            </div>
+            <div class="input-group my-1">
+              <label for="email" class="input-group-text">Email</label>
+              <input
+                type="text"
+                class="form-control"
+                id="email"
+                rulesCheck="required|email|availableEmail:listPerson"
+              />
+              <span
+                class="form-message d-none input-group-text bg-danger text-bg-danger"
+              ></span>
+            </div>
+            <div class="input-group my-1">
+              <label for="mathScore" class="input-group-text bg-success-subtle"
+                >Math Score</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="mathScore"
+                rulesCheck="required|number|minValue:0|maxValue:10"
+              />
+              <span
+                class="form-message d-none input-group-text bg-danger text-bg-danger"
+              ></span>
+            </div>
+            <div class="input-group my-1">
+              <label
+                for="physicScore"
+                class="input-group-text bg-success-subtle"
+                >Physic Score</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="physicScore"
+                rulesCheck="required|number|minValue:0|maxValue:10"
+              />
+              <span
+                class="form-message d-none input-group-text bg-danger text-bg-danger"
+              ></span>
+            </div>
+            <div class="input-group my-1">
+              <label
+                for="chemistryScore"
+                class="input-group-text bg-success-subtle"
+                >Chemistry Score</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="chemistryScore"
+                rulesCheck="required|number|minValue:0|maxValue:10"
+              />
+              <span
+                class="form-message d-none input-group-text bg-danger text-bg-danger"
+              ></span>
+            </div>
+            <div class="input-group my-1">
+              <label
+                for="daysWorking"
+                class="input-group-text bg-warning-subtle"
+                >Days Working</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="daysWorking"
+                rulesCheck="required|number"
+              />
+              <span
+                class="form-message d-none input-group-text bg-danger text-bg-danger"
+              ></span>
+            </div>
+            <div class="input-group my-1">
+              <label
+                for="dailySalary"
+                class="input-group-text bg-warning-subtle"
+                >Daily Salary</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="dailySalary"
+                rulesCheck="required|number|minValue:150000"
+              />
+              <span
+                class="form-message d-none input-group-text bg-danger text-bg-danger"
+              ></span>
+            </div>
+            <div class="input-group my-1">
+              <label
+                for="nameCompany"
+                class="input-group-text bg-primary-subtle"
+                >Name Company</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="nameCompany"
+                rulesCheck="required|letter"
+              />
+              <span
+                class="form-message d-none input-group-text bg-danger text-bg-danger"
+              ></span>
+            </div>
+            <div class="input-group my-1">
+              <label
+                for="billInvoice"
+                class="input-group-text bg-primary-subtle"
+                >Bill Invoice</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="billInvoice"
+                rulesCheck="required|number|minValue:500000"
+              />
+              <span
+                class="form-message d-none input-group-text bg-danger text-bg-danger"
+              ></span>
+            </div>
+            <div class="input-group my-1">
+              <label
+                for="customerReview"
+                class="input-group-text bg-primary-subtle"
+                >Customer Review</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="customerReview"
+                rulesCheck="required|letter"
+              />
+              <span
+                class="form-message d-none input-group-text bg-danger text-bg-danger"
+              ></span>
+            </div>
+          </form>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-success"
+              id="addPerson"
+              type="submit"
+            >
+              Add User
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              id="updatePerson"
+              disabled
+            >
+              Update Info
+            </button>
+            <button type="button" class="btn btn-danger" id="resetForm">
+              Reset Form
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0-alpha1/js/bootstrap.min.js"></script>
+    <!-- Main JS -->
+    <script type="module" src="./controllers/index.js"></script>
+  </body>
+</html>
